@@ -16,4 +16,13 @@ datasource db {
 }
 
 // NOTE: Define Model here
-
+// ? User Model
+model Users {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  lastname      String
+  createdAt DateTime @default(now()) @map("created_at") // Mapped to snake_case
+  updatedAt DateTime @updatedAt @map("updated_at")     // Mapped to snake_case
+  @@map("users") // This is the key: maps the model 'User' to the table 'user'
+}
