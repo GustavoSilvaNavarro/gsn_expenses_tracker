@@ -24,9 +24,11 @@ model Users {
   lastname    String
   householdId String     @map("household_id")
   household   Households @relation(fields: [householdId], references: [id])
+  expenses    Expenses[]
   createdAt   DateTime   @default(now()) @map("created_at") // Mapped to snake_case
   updatedAt   DateTime   @updatedAt @map("updated_at") // Mapped to snake_case
 
+  @@index([householdId])
   @@map("users") // This is the key: maps the model 'User' to the table 'user'
 }
 
@@ -39,4 +41,28 @@ model Households {
   updatedAt   DateTime @updatedAt @map("updated_at") // Mapped to snake_case
 
   @@map("households") // This is the key: maps the model 'User' to the table 'user'
+}
+
+// ? Category Model
+model Categories {
+  id        Int      @id @default(autoincrement())
+  category  String   @db.VarChar(20)
+  createdAt DateTime @default(now()) @map("created_at") // Mapped to snake_case
+  updatedAt DateTime @updatedAt @map("updated_at") // Mapped to snake_case
+
+  @@map("categories") // This is the key: maps the model 'User' to the table 'user'
+}
+
+// ? Expenses
+model Expenses {
+  id         Int      @id @default(autoincrement())
+  amount     Float
+  timestamp  DateTime
+  categoryId Int      @map("category_id")
+  userId     Int      @map("user_id")
+  user       Users    @relation(fields: [userId], references: [id])
+  createdAt  DateTime @default(now()) @map("created_at") // Mapped to snake_case
+  updatedAt  DateTime @updatedAt @map("updated_at") // Mapped to snake_case
+
+  @@map("expenses") // This is the key: maps the model 'User' to the table 'user'
 }
