@@ -32,7 +32,7 @@ model Users {
   @@map("users") // This is the key: maps the model 'User' to the table 'user'
 }
 
-// ? Category Model
+// ? Household Model
 model Households {
   id          String   @id @default(ulid())
   family_name String
@@ -64,5 +64,7 @@ model Expenses {
   createdAt  DateTime @default(now()) @map("created_at") // Mapped to snake_case
   updatedAt  DateTime @updatedAt @map("updated_at") // Mapped to snake_case
 
+  @@index([categoryId])
+  @@index([userId])
   @@map("expenses") // This is the key: maps the model 'User' to the table 'user'
 }
