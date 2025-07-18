@@ -34,7 +34,7 @@ export const startServer = async () => {
     const fastify = await serverSetup();
 
     await fastify.listen({ port: PORT });
-    fastify.log.info(`🚀 Quote Insight API is running, listening on ${PORT}`);
+    fastify.log.info(`🚀 Expense Tracker API is running, listening on ${PORT}`);
   } catch (err) {
     fastify.log.error('Error starting fastify server', err);
     process.exit(1);
