@@ -1,1 +1,1 @@
-export { prisma, prismaPlugin } from './db';
+export { prisma, prismaPlugin } from './db/index.ts';

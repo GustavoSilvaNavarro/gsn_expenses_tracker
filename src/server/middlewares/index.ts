@@ -1,1 +1,1 @@
-export { customHeadersPlugin } from './middlewareUtils';
+export { customHeadersPlugin } from './middlewareUtils.ts';

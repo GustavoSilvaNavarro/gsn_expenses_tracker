@@ -1,7 +1,7 @@
 // import { URL_PREFIX } from '@config';
 import type { FastifyInstance } from 'fastify';
 
-import monitoringRoutes from './monitoring';
+import monitoringRoutes from './monitoring.ts';
 
 const registerRoutes = async (fastify: FastifyInstance) => {
   // Register all routes with /api prefix

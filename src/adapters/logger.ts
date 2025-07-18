@@ -1,9 +1,9 @@
 import { ENVIRONMENT, LOG_LEVEL } from '@config';
-import pino from 'pino';
+import { type LoggerOptions, pino, stdTimeFunctions } from 'pino';
 
-const pinoConfiguration: pino.LoggerOptions = {
+const pinoConfiguration: LoggerOptions = {
   level: LOG_LEVEL,
-  timestamp: pino.stdTimeFunctions.isoTime,
+  timestamp: stdTimeFunctions.isoTime,
 };
 
 if (!['prd', 'stg'].includes(ENVIRONMENT)) {

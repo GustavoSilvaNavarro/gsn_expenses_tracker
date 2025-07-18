@@ -6,7 +6,7 @@ import { prismaPlugin } from '@plugins';
 import Fastify, { type FastifyBaseLogger } from 'fastify';
 import { serializerCompiler, validatorCompiler, type ZodTypeProvider } from 'fastify-type-provider-zod';
 
-import registerRoutes from './routers';
+import registerRoutes from './routers/index.ts';
 
 const fastify = Fastify({
   loggerInstance: logger as FastifyBaseLogger,

@@ -1,4 +1,4 @@
-import { testServerSetup } from '@tests/helpers/setupTestServer';
+import { testServerSetup } from '@tests/helpers/setupTestServer.ts';
 import type { FastifyInstance } from 'fastify';
 import supertest from 'supertest';
 
