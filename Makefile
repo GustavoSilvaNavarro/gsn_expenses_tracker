@@ -1,6 +1,6 @@
 #!make
 PORT = 8080
-SERVICE_NAME = gsn_quote_insights
+SERVICE_NAME = gsn_expenses_tracker
 CONTAINER_NAME = $(SERVICE_NAME)
 DOCKER_COMPOSE_TAG = $(SERVICE_NAME)_1
 TICKET_PREFIX := $(shell git branch --show-current | cut -d '_' -f 1)
