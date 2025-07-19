@@ -1,5 +1,6 @@
 import { logger } from '@adapters';
-import { PORT } from '@config';
+import { ENVIRONMENT, PORT } from '@config';
+import compress from '@fastify/compress';
 import helmet from '@fastify/helmet';
 import { customHeadersPlugin } from '@middlewares';
 import { prismaPlugin } from '@plugins';
@@ -10,7 +11,7 @@ import registerRoutes from './routers';
 
 const fastify = Fastify({
   loggerInstance: logger as FastifyBaseLogger,
-  disableRequestLogging: true,
+  disableRequestLogging: !['local', 'test'].includes(ENVIRONMENT) ? true : false,
 }).withTypeProvider<ZodTypeProvider>();
 
 fastify.setValidatorCompiler(validatorCompiler);
@@ -21,6 +22,7 @@ export const serverSetup = async () => {
   fastify.register(prismaPlugin);
 
   fastify.register(helmet);
+  fastify.register(compress);
   fastify.register(customHeadersPlugin);
 
   // Register all routes
