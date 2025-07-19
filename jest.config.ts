@@ -14,6 +14,8 @@ const config: Config = {
     '^@config$': '<rootDir>/src/config',
     '^@server$': '<rootDir>/src/server/index',
     '^@server/(.*)$': '<rootDir>/src/server/$1',
+    '^@docs$': '<rootDir>/src/docs/index',
+    '^@docs/(.*)$': '<rootDir>/src/docs/$1',
     '^@adapters$': '<rootDir>/src/adapters/index',
     '^@adapters/(.*)$': '<rootDir>/src/adapters/$1',
     '^@plugins/(.*)$': '<rootDir>/src/plugins/$1',
