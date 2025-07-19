@@ -1,7 +1,7 @@
 type ENVIRONMENT = 'dev' | 'stg' | 'prd' | 'local' | 'test';
 type LOG_LEVELS = 'info' | 'trace' | 'debug' | 'warn' | 'error' | 'fatal';
 
-export const NAME = process.env.NAME ?? 'gsn_quote_insights';
+export const NAME = process.env.NAME ?? 'gsn_expenses_tracker';
 export const ENVIRONMENT: ENVIRONMENT = (process.env.ENVIRONMENT ?? process.env.NODE_ENV ?? 'dev') as ENVIRONMENT;
 
 // Adapters

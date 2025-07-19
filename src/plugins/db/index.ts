@@ -1,4 +1,4 @@
-import logger from '@adapters/logger';
+import { logger } from '@adapters/logger';
 import { PrismaClient } from '@prisma/client';
 import type { FastifyInstance } from 'fastify';
 import fp from 'fastify-plugin';

@@ -1,4 +1,4 @@
-import { URL_PREFIX } from '@config';
+// import { URL_PREFIX } from '@config';
 import type { FastifyInstance } from 'fastify';
 
 import monitoringRoutes from './monitoring';
