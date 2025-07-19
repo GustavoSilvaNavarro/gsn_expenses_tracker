@@ -1,3 +1,5 @@
+import '@dotenvx/dotenvx/config';
+
 import { logger } from '@adapters';
 import { NAME } from '@config';
 import { startServer } from '@server';

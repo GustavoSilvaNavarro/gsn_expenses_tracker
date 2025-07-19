@@ -26,6 +26,8 @@
       "@config": ["./src/config"],
       "@server": ["./src/server/index"],
       "@server/*": ["./src/server/*"],
+      "@docs": ["./src/docs/index"],
+      "@docs/*": ["./src/docs/*"],
       "@adapters": ["./src/adapters/index"],
       "@adapters/*": ["./src/adapters/*"],
       "@plugins": ["./src/plugins/index"],
