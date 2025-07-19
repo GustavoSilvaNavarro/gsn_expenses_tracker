@@ -19,4 +19,4 @@ if (!['prd', 'stg'].includes(ENVIRONMENT)) {
   };
 }
 
-export default pino(pinoConfiguration);
+export const logger = pino(pinoConfiguration);

@@ -1,14 +1,12 @@
 import { logger } from '@adapters';
-import { buildRouter } from '@adminjs/fastify';
-import { PORT, URL_PREFIX } from '@config';
+import { PORT } from '@config';
 import helmet from '@fastify/helmet';
 import { customHeadersPlugin } from '@middlewares';
 import { prismaPlugin } from '@plugins';
 import Fastify, { type FastifyBaseLogger } from 'fastify';
 import { serializerCompiler, validatorCompiler, type ZodTypeProvider } from 'fastify-type-provider-zod';
 
-import { setupAdminJs } from './admin/index.ts';
-import registerRoutes from './routers/index.ts';
+import registerRoutes from './routers';
 
 const fastify = Fastify({
   loggerInstance: logger as FastifyBaseLogger,
@@ -22,14 +20,7 @@ export const serverSetup = async () => {
   // Register plugins
   fastify.register(prismaPlugin);
 
-  // AdminJs Setup
-  const admin = setupAdminJs();
-  await buildRouter(admin, fastify);
-
-  fastify.register(helmet, {
-    contentSecurityPolicy: false,
-    prefix: URL_PREFIX ? `/${URL_PREFIX}/admin` : '/admin',
-  });
+  fastify.register(helmet);
   fastify.register(customHeadersPlugin);
 
   // Register all routes

@@ -1,3 +1,1 @@
-import logger from './logger.ts';
-
-export { logger };
+export { logger } from './logger';
