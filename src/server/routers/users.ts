@@ -1,17 +1,18 @@
-// import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
+import { type NewHouseholdUser, newHouseholdUser } from '@interfaces';
+import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 
-// const quoteRoutes = (fastify: FastifyInstance) => {
-//   fastify.post(
-//     '/new/user/household',
-//     { schema: { body: newQuotePayload } },
-//     async function (req: FastifyRequest<{ Body: NewQuote }>, reply: FastifyReply) {
-//       const payload = req.body;
-//       const newQuote = await addNewQuote(this.prisma, payload);
+const userRoutes = (fastify: FastifyInstance) => {
+  fastify.post(
+    '/new/user/household',
+    { schema: { body: newHouseholdUser } },
+    function (req: FastifyRequest<{ Body: NewHouseholdUser }>, reply: FastifyReply) {
+      const payload = req.body;
 
-//       reply.status(201);
-//       return newQuote;
-//     },
-//   );
-// };
+      console.log(payload);
+      reply.status(201);
+      return { msg: 'Hello World' };
+    },
+  );
+};
 
-// export default quoteRoutes;
+export default userRoutes;
