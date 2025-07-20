@@ -1,9 +1,12 @@
 import * as z from 'zod/v4';
 
-export const quoteIdParam = z
-  .object({
-    quoteId: z.coerce.number().int().positive(),
-  })
-  .strict();
+export const idParam = z.strictObject({
+  id: z.coerce.number().int().positive(),
+});
 
-export type QuoteIdParam = z.infer<typeof quoteIdParam>;
+export const emailQueryParam = z.strictObject({
+  email: z.email().trim().toLowerCase(),
+});
+
+export type IdParam = z.infer<typeof idParam>;
+export type EmailQueryParam = z.infer<typeof emailQueryParam>;

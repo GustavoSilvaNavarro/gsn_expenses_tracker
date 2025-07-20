@@ -16,3 +16,9 @@ export const addNewUserAndHousehold = async (db: PrismaClient, payload: NewHouse
   });
   return newUser;
 };
+
+export const getUserDetails = async (db: PrismaClient, email: string) => {
+  const userDetails = await db.users.findFirstOrThrow({ where: { email } });
+
+  return userDetails;
+};

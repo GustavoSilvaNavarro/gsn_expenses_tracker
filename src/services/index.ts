@@ -1,1 +1,1 @@
-export { addNewUserAndHousehold } from './users';
+export { addNewUserAndHousehold, getUserDetails } from './users';
