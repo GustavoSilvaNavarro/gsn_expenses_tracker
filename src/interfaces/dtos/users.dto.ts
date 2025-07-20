@@ -4,7 +4,7 @@ export const newHouseholdUser = z.strictObject({
   email: z.email().trim(),
   name: z.string().trim().toLowerCase().min(1, { message: 'Name cannot be empty' }),
   lastname: z.string().trim().toLowerCase().min(1, { message: 'Lastname cannot be empty' }),
-  familyName: z.nullish(z.string().trim().toLowerCase().min(1, { message: 'Household name cannot be empty' })),
+  householdName: z.nullish(z.string().trim().toLowerCase().min(1, { message: 'Household name cannot be empty' })),
 });
 
 export type NewHouseholdUser = z.infer<typeof newHouseholdUser>;
