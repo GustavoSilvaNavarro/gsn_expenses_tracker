@@ -1,2 +1,2 @@
-export type { EmailQueryParam, IdParam, NewHouseholdUser } from './dtos';
-export { emailQueryParam, idParam, newHouseholdUser } from './dtos';
+export type { EmailQueryParam, HouseholdIdParam, IdParam, NewHouseholdUser } from './dtos';
+export { emailQueryParam, householdId, idParam, newHouseholdUser } from './dtos';
