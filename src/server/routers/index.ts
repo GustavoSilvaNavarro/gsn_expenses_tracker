@@ -1,13 +1,21 @@
 import { URL_PREFIX } from '@config';
 import type { FastifyInstance } from 'fastify';
 
+import householdRoutes from './households';
 import monitoringRoutes from './monitoring';
 import userRoutes from './users';
 
 const registerRoutes = async (fastify: FastifyInstance) => {
-  // Register all routes with /api prefix
   await fastify.register(monitoringRoutes);
-  await fastify.register(userRoutes, { prefix: `/${URL_PREFIX}` });
+
+  // Register all other routes with global /api prefix
+  await fastify.register(
+    async (fastify) => {
+      await fastify.register(userRoutes, { prefix: '/users' });
+      await fastify.register(householdRoutes, { prefix: '/households' });
+    },
+    { prefix: `/${URL_PREFIX}` },
+  );
 };
 
 export default registerRoutes;
