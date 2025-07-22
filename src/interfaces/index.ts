@@ -7,7 +7,6 @@ export type {
   NewExpense,
   NewExpensesArr,
   NewHouseholdUser,
-  UserIdQueryParam,
 } from './dtos';
 export {
   emailQueryParam,
@@ -17,5 +16,4 @@ export {
   newCategory,
   newExpensesArr,
   newHouseholdUser,
-  userIdQuery,
 } from './dtos';

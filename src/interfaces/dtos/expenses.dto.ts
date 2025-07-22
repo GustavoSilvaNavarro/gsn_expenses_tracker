@@ -4,6 +4,7 @@ export const newExpense = z.strictObject({
   amount: z.number().positive(),
   timestamp: z.iso.datetime(),
   categoryId: z.int().positive(),
+  userId: z.number().int().positive(),
 });
 
 export const newExpensesArr = z.strictObject({

@@ -1,29 +1,34 @@
 import type { ExpensesQueryParams, NewExpense } from '@interfaces';
-import type { PrismaClient } from '@prisma/client';
+import type { Households, PrismaClient } from '@prisma/client';
 import { BadRequestError } from '@server/errors';
+
+type Household = (Households & { users: Array<{ id: number }> } & { categories: Array<{ id: number }> }) | null;
 
 export const addNewExpenses = async (
   db: PrismaClient,
   payload: Array<NewExpense>,
   queryParams: ExpensesQueryParams,
 ) => {
-  const { userId, barebones } = queryParams;
-  const uniqueCategoryIds = Array.from(new Set(payload.map((item) => item.categoryId)));
+  const { id, barebones } = queryParams;
 
-  const [user, ids] = await Promise.all([
-    db.users.findUnique({ where: { id: userId } }),
-    db.categories.findMany({ where: { id: { in: uniqueCategoryIds } }, select: { id: true } }),
-  ]);
+  const household = (await db.households.findUnique({
+    where: { id },
+    include: { users: { select: { id: true } }, categories: { select: { id: true } } },
+  })) as Household;
 
-  if (!user || !ids.length) {
-    throw new BadRequestError(`User with ID: ${userId} does not exist or the categories do not exist.`);
-  }
+  console.log(household);
 
-  const categoryIds = ids.map((id) => id.id);
-  const expenses = payload.filter((expense) => categoryIds.includes(expense.categoryId));
+  if (!household) throw new BadRequestError(`Household with ID: ${id} does not exist`);
+  const categoryIds = household.categories.map((category) => category.id);
+  const userIds = household.users.map((user) => user.id);
+
+  const expenses = payload.filter(
+    (expense) => categoryIds.includes(expense.categoryId) && userIds.includes(expense.userId),
+  );
+  if (!expenses.length) throw new BadRequestError('There is no expenses, check the user or categories');
 
   if (barebones) {
-    const { count } = await db.expenses.createMany({ data: expenses.map((expense) => ({ ...expense, userId })) });
+    const { count } = await db.expenses.createMany({ data: expenses });
     return count;
-  } else return await db.expenses.createManyAndReturn({ data: expenses.map((expense) => ({ ...expense, userId })) });
+  } else return await db.expenses.createManyAndReturn({ data: expenses });
 };
