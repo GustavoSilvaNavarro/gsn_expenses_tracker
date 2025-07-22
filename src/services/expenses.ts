@@ -1,8 +1,6 @@
 import type { ExpensesQueryParams, NewExpense } from '@interfaces';
-import type { Households, PrismaClient } from '@prisma/client';
+import type { PrismaClient } from '@prisma/client';
 import { BadRequestError } from '@server/errors';
-
-type Household = (Households & { users: Array<{ id: number }> } & { categories: Array<{ id: number }> }) | null;
 
 export const addNewExpenses = async (
   db: PrismaClient,
@@ -11,12 +9,10 @@ export const addNewExpenses = async (
 ) => {
   const { id, barebones } = queryParams;
 
-  const household = (await db.households.findUnique({
+  const household = await db.households.findUnique({
     where: { id },
     include: { users: { select: { id: true } }, categories: { select: { id: true } } },
-  })) as Household;
-
-  console.log(household);
+  });
 
   if (!household) throw new BadRequestError(`Household with ID: ${id} does not exist`);
   const categoryIds = household.categories.map((category) => category.id);
