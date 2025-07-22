@@ -28,6 +28,8 @@
       "@server/*": ["./src/server/*"],
       "@docs": ["./src/docs/index"],
       "@docs/*": ["./src/docs/*"],
+      "@errors": ["./src/server/errors/index"],
+      "@errors/*": ["./src/server/errors/*"],
       "@adapters": ["./src/adapters/index"],
       "@adapters/*": ["./src/adapters/*"],
       "@plugins": ["./src/plugins/index"],

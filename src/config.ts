@@ -9,5 +9,5 @@ export const LOG_LEVEL: LOG_LEVELS = (process.env.LOG_LEVEL as LOG_LEVELS) || EN
 
 // Entrypoints
 export const PORT = +(process.env.PORT ?? 8080);
-export const URL_PREFIX = ENVIRONMENT === 'local' || ENVIRONMENT === 'test' ? '' : 'api';
+export const URL_PREFIX = ENVIRONMENT === 'local' || ENVIRONMENT === 'test' ? 'api' : 'expense_tracker_api';
 export const API_URL = process.env.API_URL ?? 'http://localhost:8080';

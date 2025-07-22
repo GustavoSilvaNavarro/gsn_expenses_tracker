@@ -34,22 +34,25 @@ model Users {
 
 // ? Household Model
 model Households {
-  id          String   @id @default(ulid())
-  family_name String
-  users       Users[]
-  createdAt   DateTime @default(now()) @map("created_at") // Mapped to snake_case
-  updatedAt   DateTime @updatedAt @map("updated_at") // Mapped to snake_case
+  id            String       @id @default(ulid())
+  householdName String       @map("household_name")
+  users         Users[]
+  categories    Categories[]
+  createdAt     DateTime     @default(now()) @map("created_at") // Mapped to snake_case
+  updatedAt     DateTime     @updatedAt @map("updated_at") // Mapped to snake_case
 
   @@map("households") // This is the key: maps the model 'User' to the table 'user'
 }
 
 // ? Category Model
 model Categories {
-  id        Int        @id @default(autoincrement())
-  category  String     @db.VarChar(20)
-  expenses  Expenses[]
-  createdAt DateTime   @default(now()) @map("created_at") // Mapped to snake_case
-  updatedAt DateTime   @updatedAt @map("updated_at") // Mapped to snake_case
+  id          Int        @id @default(autoincrement())
+  category    String     @db.VarChar(20)
+  householdId String     @map("household_id")
+  household   Households @relation(fields: [householdId], references: [id])
+  expenses    Expenses[]
+  createdAt   DateTime   @default(now()) @map("created_at") // Mapped to snake_case
+  updatedAt   DateTime   @updatedAt @map("updated_at") // Mapped to snake_case
 
   @@map("categories") // This is the key: maps the model 'User' to the table 'user'
 }
