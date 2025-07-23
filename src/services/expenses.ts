@@ -18,9 +18,9 @@ export const addNewExpenses = async (
   const categoryIds = household.categories.map((category) => category.id);
   const userIds = household.users.map((user) => user.id);
 
-  const expenses = payload.filter(
-    (expense) => categoryIds.includes(expense.categoryId) && userIds.includes(expense.userId),
-  );
+  const expenses = payload
+    .filter((expense) => categoryIds.includes(expense.categoryId) && userIds.includes(expense.userId))
+    .map((expense) => ({ ...expense, householdId: id }));
   if (!expenses.length) throw new BadRequestError('There is no expenses, check the user or categories');
 
   if (barebones) {
@@ -30,5 +30,5 @@ export const addNewExpenses = async (
 };
 
 export const retrieveAllExpensesByHouseholdId = async (db: PrismaClient, householdId: string) => {
-  // return await db.expenses.findMany({ where: { }})
+  return await db.expenses.findMany({ where: { householdId }, include: { user: true, category: true } });
 };
