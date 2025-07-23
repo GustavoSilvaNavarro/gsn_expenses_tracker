@@ -38,6 +38,7 @@ model Households {
   householdName String       @map("household_name")
   users         Users[]
   categories    Categories[]
+  expenses      Expenses[]
   createdAt     DateTime     @default(now()) @map("created_at") // Mapped to snake_case
   updatedAt     DateTime     @updatedAt @map("updated_at") // Mapped to snake_case
 
@@ -59,15 +60,17 @@ model Categories {
 
 // ? Expenses
 model Expenses {
-  id         Int        @id @default(autoincrement())
-  amount     Float
-  timestamp  DateTime
-  categoryId Int        @map("category_id")
-  userId     Int        @map("user_id")
-  user       Users      @relation(fields: [userId], references: [id])
-  category   Categories @relation(fields: [categoryId], references: [id])
-  createdAt  DateTime   @default(now()) @map("created_at") // Mapped to snake_case
-  updatedAt  DateTime   @updatedAt @map("updated_at") // Mapped to snake_case
+  id          Int        @id @default(autoincrement())
+  amount      Float
+  timestamp   DateTime
+  categoryId  Int        @map("category_id")
+  userId      Int        @map("user_id")
+  householdId String     @map("household_id")
+  user        Users      @relation(fields: [userId], references: [id])
+  category    Categories @relation(fields: [categoryId], references: [id])
+  household   Households @relation(fields: [householdId], references: [id])
+  createdAt   DateTime   @default(now()) @map("created_at") // Mapped to snake_case
+  updatedAt   DateTime   @updatedAt @map("updated_at") // Mapped to snake_case
 
   @@index([categoryId])
   @@index([userId])

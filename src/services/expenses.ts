@@ -28,3 +28,7 @@ export const addNewExpenses = async (
     return count;
   } else return await db.expenses.createManyAndReturn({ data: expenses });
 };
+
+export const retrieveAllExpensesByHouseholdId = async (db: PrismaClient, householdId: string) => {
+  // return await db.expenses.findMany({ where: { }})
+};
