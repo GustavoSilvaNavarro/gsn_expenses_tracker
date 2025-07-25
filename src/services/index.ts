@@ -1,4 +1,4 @@
-export { createNewCategory } from './categories';
-export { addNewExpenses } from './expenses';
+export { createNewCategory, retrieveCategoriesByHouseholdId } from './categories';
+export { addNewExpenses, retrieveAllExpensesByHouseholdId } from './expenses';
 export { getHouseholdsData } from './households';
-export { addNewUserAndHousehold, getUserDetails } from './users';
+export { addNewUserAndHousehold, addNewUserToHousehold, getUserDetails } from './users';

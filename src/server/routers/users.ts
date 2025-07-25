@@ -1,5 +1,14 @@
-import { type EmailQueryParam, emailQueryParam, type NewHouseholdUser, newHouseholdUser } from '@interfaces';
-import { addNewUserAndHousehold, getUserDetails } from '@services/users';
+import {
+  type EmailQueryParam,
+  emailQueryParam,
+  householdId,
+  type HouseholdIdParam,
+  type NewHouseholdUser,
+  newHouseholdUser,
+  type NewUser,
+  newUser,
+} from '@interfaces';
+import { addNewUserAndHousehold, addNewUserToHousehold, getUserDetails } from '@services/users';
 import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 
 const userRoutes = (fastify: FastifyInstance) => {
@@ -19,6 +28,14 @@ const userRoutes = (fastify: FastifyInstance) => {
     async function (req: FastifyRequest<{ Querystring: EmailQueryParam }>, reply: FastifyReply) {
       const userDetails = await getUserDetails(this.prisma, req.query.email);
       return reply.status(200).send(userDetails);
+    },
+  );
+  fastify.post(
+    '/add/new',
+    { schema: { querystring: householdId, body: newUser } },
+    async function (req: FastifyRequest<{ Querystring: HouseholdIdParam; Body: NewUser }>, reply: FastifyReply) {
+      const newUser = await addNewUserToHousehold(this.prisma, req.body, req.query.id);
+      return reply.status(201).send(newUser);
     },
   );
 };

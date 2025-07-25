@@ -24,6 +24,9 @@ prisma-migration-down:
 prisma-create-migration:
 	npx prisma migrate dev --name $(name)
 
+prisma-manual-migration:
+	npx prisma migrate dev --create-only --name $(name)
+
 # DB Commands
 migrate:
 	npm run typeorm -- migration:run -d ./src/adapters/db/typeorm/migrationDataSource.ts

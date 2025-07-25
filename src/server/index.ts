@@ -14,7 +14,7 @@ import registerRoutes from './routers';
 
 const fastify = Fastify({
   loggerInstance: logger as FastifyBaseLogger,
-  disableRequestLogging: !['local', 'test'].includes(ENVIRONMENT) ? true : false,
+  disableRequestLogging: !['local', 'test'].includes(ENVIRONMENT),
 }).withTypeProvider<ZodTypeProvider>();
 
 fastify.setValidatorCompiler(validatorCompiler);
@@ -26,7 +26,7 @@ export const serverSetup = async () => {
 
   fastify.register(helmet);
   fastify.register(compress);
-  fastify.register(swagger, { openapi: swaggerDefinition });
+  fastify.register(swagger, { mode: 'static', specification: { document: swaggerDefinition } });
   fastify.register(swaggerUI, {
     routePrefix: '/docs',
   });
