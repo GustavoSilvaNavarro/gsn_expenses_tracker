@@ -1,6 +1,7 @@
 import { API_URL } from '@config';
 
-import { monitoringRoutes } from './paths';
+import { monitoringRoutes, userPaths, userSchemas } from './paths';
+import { schemas } from './schemas';
 
 export const swaggerDefinition = {
   openapi: '3.0.0',
@@ -15,26 +16,8 @@ export const swaggerDefinition = {
     { name: 'Users', description: 'User management endpoints.' },
     { name: 'Households', description: 'Households management endpoints.' },
   ],
-  paths: { ...monitoringRoutes },
+  paths: { ...monitoringRoutes, ...userPaths },
   components: {
-    schemas: {
-      Error: {
-        type: 'object' as const,
-        properties: {
-          statusCode: { type: 'number' as const, description: 'HTTP status code', example: 500 },
-          error: {
-            type: 'string' as const,
-            description: 'Error type (e.g., "Service Unavailable")',
-            example: 'Internal Server Error',
-          },
-          message: {
-            type: 'string' as const,
-            description: 'Detailed error message',
-            example: 'An unexpected error occurred on the server',
-          },
-        },
-        required: ['statusCode', 'error', 'message'],
-      },
-    },
+    schemas: { ...userSchemas, ...schemas },
   },
 };
