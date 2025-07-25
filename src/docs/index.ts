@@ -1,5 +1,7 @@
 import { API_URL } from '@config';
 
+import { monitoringRoutes } from './paths';
+
 export const swaggerDefinition = {
   openapi: '3.0.0',
   info: {
@@ -13,6 +15,7 @@ export const swaggerDefinition = {
     { name: 'Users', description: 'User management endpoints.' },
     { name: 'Households', description: 'Households management endpoints.' },
   ],
+  paths: { ...monitoringRoutes },
   components: {
     schemas: {
       Error: {
