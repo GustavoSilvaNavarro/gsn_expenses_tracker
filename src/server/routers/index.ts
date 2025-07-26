@@ -1,5 +1,5 @@
 import { URL_PREFIX } from '@config';
-// import helmet from '@fastify/helmet';
+import helmet from '@fastify/helmet';
 import type { FastifyInstance } from 'fastify';
 import { serializerCompiler, validatorCompiler, type ZodTypeProvider } from 'fastify-type-provider-zod';
 
@@ -10,7 +10,7 @@ import monitoringRoutes from './monitoring';
 import userRoutes from './users';
 
 export const registerRoutes = async (fastify: FastifyInstance) => {
-  // fastify.register(helmet);
+  fastify.register(helmet);
   await fastify.register(monitoringRoutes);
 
   // Register all other routes with global /api prefix
