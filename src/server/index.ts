@@ -2,7 +2,6 @@ import { logger } from '@adapters';
 import { ENVIRONMENT, PORT } from '@config';
 import { swaggerDefinition } from '@docs';
 import compress from '@fastify/compress';
-// import helmet from '@fastify/helmet';
 import swagger from '@fastify/swagger';
 import swaggerUI from '@fastify/swagger-ui';
 import { customHeadersPlugin } from '@middlewares';
@@ -20,7 +19,6 @@ export const serverSetup = async () => {
   // Register plugins
   fastify.register(prismaPlugin);
 
-  // fastify.register(helmet);
   fastify.register(compress);
   fastify.register(swagger, { mode: 'static', specification: { document: swaggerDefinition } });
   fastify.register(swaggerUI, {
