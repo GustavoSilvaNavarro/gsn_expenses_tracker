@@ -3,12 +3,15 @@
     "adminjs",
     "autoincrement",
     "barebones",
+    "codegen",
     "dotenvx",
     "dtos",
+    "graphiql",
     "healthcheck",
     "healthz",
     "isready",
     "lastname",
+    "Mercurius",
     "qodo",
     "Testerson"
   ]

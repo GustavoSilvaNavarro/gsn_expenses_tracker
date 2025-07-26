@@ -15,7 +15,7 @@ const userRoutes = (fastify: FastifyInstance) => {
   fastify.post(
     '/new/user/household',
     { schema: { body: newHouseholdUser } },
-    async function (req: FastifyRequest<{ Body: NewHouseholdUser }>, reply: FastifyReply) {
+    async function (req: FastifyRequest<{ Body: NewHouseholdUser }>, reply: FastifyReply): Promise<void> {
       const payload = req.body;
       const newUser = await addNewUserAndHousehold(this.prisma, payload);
 
@@ -26,7 +26,8 @@ const userRoutes = (fastify: FastifyInstance) => {
     '/user/details',
     { schema: { querystring: emailQueryParam } },
     async function (req: FastifyRequest<{ Querystring: EmailQueryParam }>, reply: FastifyReply) {
-      const userDetails = await getUserDetails(this.prisma, req.query.email);
+      const query = req.query;
+      const userDetails = await getUserDetails(this.prisma, query.email);
       return reply.status(200).send(userDetails);
     },
   );

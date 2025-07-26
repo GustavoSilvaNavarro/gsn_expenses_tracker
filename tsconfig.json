@@ -26,6 +26,8 @@
       "@config": ["./src/config"],
       "@server": ["./src/server/index"],
       "@server/*": ["./src/server/*"],
+      "@graphql": ["./src/graphql/index"],
+      "@graphql/*": ["./src/graphql/*"],
       "@docs": ["./src/docs/index"],
       "@docs/*": ["./src/docs/*"],
       "@errors": ["./src/server/errors/index"],
