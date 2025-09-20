@@ -11,7 +11,7 @@
     "check": "npx prettier --check src tests",
     "migration:up": "npx prisma migrate dev",
     "migration:down": "npx prisma migrate reset",
-    "test": "jest -c jest.config.ts"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest -c jest.config.ts"
   },
   "keywords": [],
   "author": "Gustavo Silva",
@@ -51,15 +51,15 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-unused-imports": "^4.1.4",
     "globals": "^16.3.0",
-    "jest": "^30.0.4",
+    "jest": "^30.1.3",
     "jest-extended": "^6.0.0",
     "jest-when": "^3.7.0",
     "mercurius-codegen": "^6.0.1",
     "nodemon": "^3.1.10",
     "prettier": "^3.6.2",
     "prisma": "^6.12.0",
-    "supertest": "^7.1.3",
-    "ts-jest": "^29.4.0",
+    "supertest": "^7.1.4",
+    "ts-jest": "^29.4.4",
     "typescript-eslint": "^8.37.0",
     "typescript-transform-paths": "^3.5.5"
   }
