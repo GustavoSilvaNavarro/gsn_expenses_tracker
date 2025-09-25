@@ -1,6 +1,7 @@
 import { logger } from '@adapters';
 import { customHeadersPlugin } from '@middlewares';
-import registerRoutes from '@server/routers';
+import { prismaPlugin } from '@plugins';
+import { registerGraphQlAndRoutes } from '@server/registration';
 import Fastify, { type FastifyBaseLogger } from 'fastify';
 import { serializerCompiler, validatorCompiler, type ZodTypeProvider } from 'fastify-type-provider-zod';
 
@@ -15,13 +16,12 @@ export const testServerSetup = async (skipDatabase = false) => {
 
   // Only register Prisma plugin if database is needed
   if (!skipDatabase) {
-    const { prismaPlugin } = await import('@plugins');
     fastify.register(prismaPlugin);
   }
 
   fastify.register(customHeadersPlugin);
 
-  await registerRoutes(fastify);
+  await registerGraphQlAndRoutes(fastify);
   await fastify.ready();
 
   return fastify;

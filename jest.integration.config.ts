@@ -1,15 +1,15 @@
-import type { Config } from 'jest';
+import type { Config } from '@jest/types';
 
-const config: Config = {
-  roots: ['<rootDir>/tests/unit'],
-  moduleDirectories: ['node_modules', '<rootDir>'],
-  modulePathIgnorePatterns: ['<rootDir>/tests/integration'],
+const config: Config.InitialOptions = {
+  roots: ['<rootDir>/tests/integration'],
+  modulePathIgnorePatterns: ['<rootDir>/tests/unit'],
   verbose: true,
   preset: 'ts-jest',
   testEnvironment: 'node',
-  testRegex: 'test.ts',
+  testRegex: 'integration.test.ts',
+  testTimeout: 5000,
   setupFiles: ['./jest.setup.ts'],
-  setupFilesAfterEnv: ['./tests/unit/setup.ts'],
+  setupFilesAfterEnv: ['./tests/integration/setup.ts'],
   moduleNameMapper: {
     '^@config$': '<rootDir>/src/config',
     '^@server$': '<rootDir>/src/server/index',
@@ -35,4 +35,5 @@ const config: Config = {
     '^@mocks$': '<rootDir>/tests/__mocks__/index',
   },
 };
+
 export default config;
