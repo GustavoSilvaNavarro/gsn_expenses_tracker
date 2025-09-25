@@ -49,6 +49,6 @@ export const connectTestDb = async () => {
 };
 
 export const tearDownDb = async () => {
-  if (dbContainer) await dbContainer.stop();
   if (testDbConn) await testDbConn.$disconnect();
+  if (dbContainer) await dbContainer.stop();
 };
